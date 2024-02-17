@@ -9,8 +9,15 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // {
+    //   "username": "_$$ND_FUNC$$_function(){ return 'Hello'; }()",
+    //   "gender": "Male",
+    //   "Age": 40
+    // };
+
     // Serialize the data
     const serializedData = serialize.serialize({ username, password });
+
     console.log(serializedData)
 
     try {
@@ -21,7 +28,9 @@ export default function Home() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ data: serializedData })
+
       });
+      // body: JSON.stringify({ data: serializedData })
 
       if (response.ok) {
         // Handle success
