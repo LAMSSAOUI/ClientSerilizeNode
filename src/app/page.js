@@ -22,6 +22,7 @@ export default function Home() {
     
     // Serialize the data
     const serializedData = serialize.serialize({ username, password });
+    console.log(serializedData)
    
     try {
       // Send serialized data to the server
@@ -30,7 +31,7 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ data: serializedData })
+        body:  serializedData 
       });
 
       if (response.ok) {
