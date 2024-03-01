@@ -36,7 +36,7 @@ const index = () => {
     // Function to fetch the image from the server
     const fetchImage = async () => {
       try {
-        const response = await fetch('http://localhost:3000/file/1');
+        const response = await fetch('http://localhost:3000/file');
         if (!response.ok) {
           throw new Error('Failed to fetch image');
         }
