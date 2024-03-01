@@ -58,23 +58,42 @@ const index = () => {
   }, []); // Empty dependency array ensures this effect runs only once
 
   return (
-    <div className='flex flex-col justify-center'>
-        <div className='flex justify-center'>Make a note on this image</div>
-
-        <div className='flex  justify-center'>
-            <div className='w-96 h-40 '>
-            {imageUrl && <img src={imageUrl} alt="Fetched Image" />}
-            </div>
+    <div className='flex flex-col justify-center items-center bg-[#E8E8E8] h-screen '>
+      <div className='bg-[#819EF1] flex flex-col gap-10 w-fit rounded p-11'>
+        <div>
+          <div className='flex justify-start text-start font-bold  text-2xl tracking-wider'>Make a note on this image</div>
+          <div>Access has been requested</div>
         </div>
-         <input type='text' value={note} onChange={handleChange}  className='border-dotted border-red'/>
-         <input 
-                type="text" 
-                value={note} 
-                onChange={handleChange}
-                className="border h-10 w-96 mt-2  p-2"
-        />
+          
+          <div className='flex flex-col items-center gap-10'>
+              <div className='flex justify-center flex-col'>
+                  {/* <div className='w-96 h-40 '> */}
+                    
+                  <img className="h-auto max-w-sm rounded-lg " src={imageUrl} alt="image description"/>
+                  <div className='text-center p-4 border-2 rounded-lg border-t-0'>Confirmed by the Admin for your notes</div>
 
-        <button onClick={handleSubmit}>Envoyer</button>
+                  {/* {imageUrl && <img src={imageUrl} alt="Fetched Image"  className='rounded'/>} */}
+                  {/* </div> */}
+              </div>
+              {/* <div className='flex flex-col justify-start w-full'> */}
+              <div className='w-full'>
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Note</label>
+                  <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  value={note} onChange={handleChange} placeholder="Write your thoughts here..."></textarea>
+              </div>
+                
+              {/* </div> */}
+              
+
+              {/* <input 
+                      type="text" 
+                      value={note} 
+                      onChange={handleChange}
+                      className="border h-10 w-96 mt-2  p-2 "
+              /> */}
+              </div>
+                
+              <button onClick={handleSubmit}>Envoyer</button>
+      </div>
     </div>
   );
 };
