@@ -26,6 +26,7 @@ import React from 'react';
 
 export default function Admin() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [uploadResponse, setUploadResponse] = useState(null);
 
   const handleImageChange = (event) => {
     setSelectedImage(event.target.files[0]);
@@ -50,7 +51,10 @@ export default function Admin() {
         throw new Error('Failed to upload image');
       }
 
-      const responseData = await response.json();
+      const responseData = await response.text(); // Assuming the server returns text
+      setUploadResponse(responseData); 
+
+      // const responseData = await response.json();
       console.log('Image uploaded successfully:', responseData);
       // Handle success response as needed
     } catch (error) {
@@ -60,18 +64,17 @@ export default function Admin() {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col ">
-          <h1 className="p-4">Admin Panel</h1>
-          <div className="flex flex-col items-start gap-6">
-            <input type="file" onChange={handleImageChange} />
-            <button onClick={handleSubmit}>Envoyer</button>
+    <div className="flex justify-center bg-[#819EF1] h-screen items-center">
+      <div className="flex flex-col gap-8 h-60 w-fit bg-[#FFFFFF] rounded-sm p-9 ">
+          <h1 className=" text-center font-bold  text-3xl tracking-wider ">You can upload your image </h1>
+          <div className="flex flex-col justify-center  gap-8 w-full">
+            <input onChange={handleImageChange} className="block w-72 mx-auto text-lg text-gray-900 border border-gray-300  rounded-lg cursor-pointer bg-[#E8E8E8] dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-200 dark:placeholder-slate-50" id="large_size" type="file"/>
+            <button onClick={handleSubmit} className="rounded text-white font-semibold   bg-green-400  hover:bg-green-600 w-40 px-2 py-2 mx-auto ">Envoyer</button>
           </div>
-          
-        </div>
+          {uploadResponse && <p className="text-center text-white">{uploadResponse}</p>} 
+      </div>
     </div>
-    
-    
   );
 }
+
 
