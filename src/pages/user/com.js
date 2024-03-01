@@ -1,92 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import com from './com'
+import React from 'react'
 
-const index = () => {
-  const [imageUrl, setImageUrl] = useState('');
-
-  const [note, setNote] = useState('');
-
-  const handleChange = (event) => {
-    setNote(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    // Serialize data
-    const data = { imageUrl: imageUrl, note: note };
-
-    // Send data via fetch POST
-    fetch('http://localhost:3000/api/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(response => response)
-      .then(data => {
-        console.log('Success:', data);
-        // Handle success if needed
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Handle error if needed
-      });
-  };
-
-  useEffect(() => {
-    // Function to fetch the image from the server
-    const fetchImage = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/file');
-        if (!response.ok) {
-          throw new Error('Failed to fetch image');
-        }
-        const imageData = await response.blob();
-        const url = URL.createObjectURL(imageData);
-        setImageUrl(url);
-      } catch (error) {
-        console.error('Error fetching image:', error);
-      }
-    };
-
-    // Call the fetchImage function when the component mounts
-    fetchImage();
-
-    // Clean up function to revoke the URL object when component unmounts
-    return () => {
-      URL.revokeObjectURL(imageUrl);
-    };
-  }, []); // Empty dependency array ensures this effect runs only once
-
-  return (
-    <div className='flex flex-col justify-center items-center bg-[#819EF1] h-screen '>
-      <div className='bg-[#ADCEFF] flex flex-col gap-10 w-fit rounded p-9 max-h-[680px]'>
-        <div>
-          <div className='flex justify-start text-start font-bold  text-2xl tracking-wider'>Make a note on this image</div>
-          <div>Access has been requested</div>
-        </div>
-          
-          <div className='flex flex-col items-center gap-4'>
-              <div className='flex justify-center flex-col'>
-                  {/* <div className='w-96 h-40 '> */}
-                    
-                  <img className="h-auto max-w-sm rounded-lg " src={imageUrl} alt="image description"/>
-                  {/* <div className='text-center p-4 border-2 rounded-lg border-t-0'>Confirmed by the Admin for your notes</div> */}
-
-                  {/* {imageUrl && <img src={imageUrl} alt="Fetched Image"  className='rounded'/>} */}
-                  {/* </div> */}
-              </div>
-              {/* <div className='flex flex-col justify-start w-full'> */}
-              <div className='w-full'>
-                  {/* <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Note</label>
-                  <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  value={note} onChange={handleChange} placeholder="Write your thoughts here..."></textarea> */}
-                  
-              </div>
-
-              <div>
-                <div className='flex justify-start text-start   tracking-wider mb-3'>Write your note </div>
-              <form>
-            <div class="w-full mb-2 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 h-44">
+const com = () => {
+  return <>
+            <form>
+            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                 <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
                     <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600">
                         <div class="flex items-center space-x-1 rtl:space-x-reverse sm:pe-4">
@@ -165,32 +82,13 @@ const index = () => {
                 </div>
                 <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
                     <label for="editor" class="sr-only">Publish post</label>
-                    <textarea id="editor" rows="3" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article ..." required  value={note}  onChange={handleChange}></textarea>
+                    <textarea id="editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article..." required ></textarea>
                 </div>
             </div>
-            <div className='flex justify-end'>
-              <button type="submit" class=" items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" onClick={handleSubmit}>
-                  Publish post
-              </button>
-            </div>
-            
+            <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                Publish post
+            </button>
             </form>
-              </div>
-              {/* </div> */}
-              
-
-              {/* <input 
-                      type="text" 
-                      value={note} 
-                      onChange={handleChange}
-                      className="border h-10 w-96 mt-2  p-2 "
-              /> */}
-              </div>
-                
-              {/* <button onClick={handleSubmit}>Envoyer</button> */}
-      </div>
-    </div>
-  );
-};
-
-export default index;
+    </>
+}
+export default com
