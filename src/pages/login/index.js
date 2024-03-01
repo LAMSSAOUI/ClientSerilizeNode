@@ -74,11 +74,11 @@ export default function Home() {
   return (
 
     <div className="flex justify-center items-center h-screen ">
-      <div className="flex max-w-2xl mx-auto shadow border-b  flex-col gap-4 w-fit p-10">
-          <h2 className="text-center font-thin  text-2xl tracking-wider">Login</h2>
+      <div className="flex max-w-2xl mx-auto shadow border-b bg-[#E8E8E8] flex-col gap-4 w-fit p-10">
+          <h2 className="text-center font-bold  text-3xl tracking-wider ">Login</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col  gap-4">
-              <label className="block text-gray-600 text-sm  font-normal ">Username:</label>
+            <div className="flex flex-col  gap-2">
+              <label className="block text-gray-600 text-lg  font-normal ">Username:</label>
               <input 
                 type="text" 
                 value={username} 
@@ -86,8 +86,8 @@ export default function Home() {
                 className=" border h-10 w-96 mt-2 p-2"
               />
             </div>
-            <div className="flex flex-col gap-4">
-              <label className="block text-gray-600 text-sm  font-normal ">Password:</label>
+            <div className="flex flex-col gap-2">
+              <label className="block text-gray-600 text-lg  font-normal ">Password:</label>
               <input 
                 type="text" 
                 value={password} 
@@ -96,7 +96,7 @@ export default function Home() {
               />
             </div>
             <button type="submit" className=" rounded text-white font-semibold  mr-3 bg-green-400  hover:bg-green-600 px-2 py-2 w-full" >Submit</button>
-            <button type="submit" className=" rounded text-white font-semibold  mr-3 bg-gray-300 px-2 py-2 w-full" onClick={goToSignup}>Sign up</button>
+            <button type="submit" className=" rounded text-white font-semibold  mr-3 bg-[#819EF1] px-2 py-2 w-full" onClick={goToSignup}>Sign up</button>
           </form>
       </div>
     </div>
