@@ -74,7 +74,7 @@ export default function Home() {
   return (
 
     <div className="flex justify-center items-center h-screen ">
-      <div className="flex max-w-2xl mx-auto shadow border-b bg-[#E8E8E8] flex-col gap-4 w-fit p-10">
+      <div className="flex max-w-2xl mx-auto shadow border-b bg-[#E8E8E8] flex-col gap-4 w-fit p-10  rounded-lg">
           <h2 className="text-center font-bold  text-3xl tracking-wider ">Login</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col  gap-2">
@@ -96,7 +96,7 @@ export default function Home() {
               />
             </div>
             <button type="submit" className=" rounded text-white font-semibold  mr-3 bg-green-400  hover:bg-green-600 px-2 py-2 w-full" >Submit</button>
-            <button type="submit" className=" rounded text-white font-semibold  mr-3 bg-[#819EF1] px-2 py-2 w-full" onClick={goToSignup}>Sign up</button>
+            <button type="submit" className=" rounded text-white font-semibold  mr-3 bg-[#819EF1] hover:bg-[#3E6BEC] px-2 py-2 w-full" onClick={goToSignup}>Sign up</button>
           </form>
       </div>
     </div>

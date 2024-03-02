@@ -11,8 +11,10 @@ const index = () => {
   };
 
   const handleSubmit = () => {
+    const cleanImageUrl = imageUrl.replace('blob:http://localhost:3001/', '');
+    console.log('the clean image url is that ', cleanImageUrl)
     // Serialize data
-    const data = { imageUrl: imageUrl, note: note };
+    const data = { imageUrl: imageUrl, note: note ,  imageid : cleanImageUrl};
 
     // Send data via fetch POST
     fetch('http://localhost:3000/api/create', {
@@ -25,6 +27,7 @@ const index = () => {
       .then(response => response)
       .then(data => {
         console.log('Success:', data);
+        alert('Note added')
         // Handle success if needed
       })
       .catch(error => {
@@ -34,16 +37,50 @@ const index = () => {
   };
 
   useEffect(() => {
+    const fetchNotes = async () => {
+      const cleanImageUrl = imageUrl.replace('blob:http://localhost:3001/', '');
+      console.log('the clean image url is that ', cleanImageUrl)
+      try {
+        const response = await fetch(`http://localhost:3000/notes/${cleanImageUrl}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch notes');
+        }
+        const notesData = await response.json();
+        console.log('Notes fetched successfully:', notesData);
+        // Handle the fetched notes data as needed
+      } catch (error) {
+        console.error('Error fetching notes:', error);
+      }
+    };
+
+    if (imageUrl) {
+      fetchNotes();
+    }
+  }, [imageUrl]);
+
+
+  useEffect(() => {
+    
     // Function to fetch the image from the server
     const fetchImage = async () => {
+      
       try {
         const response = await fetch('http://localhost:3000/file');
         if (!response.ok) {
           throw new Error('Failed to fetch image');
         }
+        console.log('the response is ', response)
+
         const imageData = await response.blob();
+        console.log('the image data is this ', imageData)
         const url = URL.createObjectURL(imageData);
+        console.log('the url is ' , url)
+
+        // const parsedCode = JSON.parse(response);
+        // // const fileId = parsedCode.dataValues.id;
+        // console.log('File ID:', parsedCode);
         setImageUrl(url);
+
       } catch (error) {
         console.error('Error fetching image:', error);
       }
@@ -59,7 +96,7 @@ const index = () => {
   }, []); // Empty dependency array ensures this effect runs only once
 
   return (
-    <div className='flex flex-col justify-center items-center bg-[#819EF1] h-screen '>
+    <div className='flex flex-row justify-around items-center bg-[#819EF1] h-screen '>
       <div className='bg-[#ADCEFF] flex flex-col gap-10 w-fit rounded p-9 max-h-[680px]'>
         <div>
           <div className='flex justify-start text-start font-bold  text-2xl tracking-wider'>Make a note on this image</div>
@@ -188,6 +225,27 @@ const index = () => {
               </div>
                 
               {/* <button onClick={handleSubmit}>Envoyer</button> */}
+      </div>
+
+
+{/* ####################     the second card   ##########################  */}
+
+      <div className='bg-[#ADCEFF] flex flex-col gap-10 w-fit rounded p-9 max-h-[680px]'>
+        
+          <div class="flex items-start gap-2.5">
+            <img class="w-8 h-8 rounded-full" src="/pexels-mikhail-nilov-7681566.png" alt="Jese image"/>
+            <div class="flex flex-col gap-1 w-full max-w-[320px]">
+                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                  <span class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
+                  <span class="text-sm font-normal text-gray-500 dark:text-gray-400">11:46</span>
+                </div>
+                <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                  <p class="text-sm font-normal text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
+                </div>
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+            </div>
+          </div>
+
       </div>
     </div>
   );

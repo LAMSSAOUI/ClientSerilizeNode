@@ -62,7 +62,7 @@ export default function Home() {
   return (
 
     <div className="flex justify-center items-center h-screen ">
-      <div className="flex max-w-2xl mx-auto shadow  border-b bg-[#E8E8E8] flex-col gap-4 w-fit p-10">
+      <div className="flex max-w-2xl mx-auto shadow  border-b bg-[#E8E8E8] flex-col gap-4 w-fit p-10 rounded-lg">
           <h2 className="text-center font-bold  text-3xl tracking-wider">Sign up</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="flex flex-col  gap-2">
