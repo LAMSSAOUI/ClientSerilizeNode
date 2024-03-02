@@ -3,8 +3,9 @@ import com from './com'
 
 const index = () => {
   const [imageUrl, setImageUrl] = useState('');
-
+  const [imageid , setImageid ] = useState();
   const [note, setNote] = useState('');
+  const [notesData , setNotesData] = useState();
 
   const handleChange = (event) => {
     setNote(event.target.value);
@@ -14,9 +15,8 @@ const index = () => {
     const cleanImageUrl = imageUrl.replace('blob:http://localhost:3001/', '');
     console.log('the clean image url is that ', cleanImageUrl)
     // Serialize data
-    const data = { imageUrl: imageUrl, note: note ,  imageid : cleanImageUrl};
+    const data = { imageUrl: imageUrl, note: note ,  imageid : imageid};
 
-    // Send data via fetch POST
     fetch('http://localhost:3000/api/create', {
       method: 'POST',
       headers: {
@@ -41,11 +41,19 @@ const index = () => {
       const cleanImageUrl = imageUrl.replace('blob:http://localhost:3001/', '');
       console.log('the clean image url is that ', cleanImageUrl)
       try {
-        const response = await fetch(`http://localhost:3000/notes/${cleanImageUrl}`);
+
+        const data = await fetch(`http://localhost:3000/Imageid/`);
+        const res = await data.json()
+        console.log('the data of the file is ', res)
+        const id = res.id
+        console.log('the id is ', id)
+        setImageid(id)
+        const response = await fetch(`http://localhost:3000/notesImage/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch notes');
         }
         const notesData = await response.json();
+        setNotesData(notesData)
         console.log('Notes fetched successfully:', notesData);
         // Handle the fetched notes data as needed
       } catch (error) {
@@ -231,20 +239,50 @@ const index = () => {
 {/* ####################     the second card   ##########################  */}
 
       <div className='bg-[#ADCEFF] flex flex-col gap-10 w-fit rounded p-9 max-h-[680px]'>
-        
-          <div class="flex items-start gap-2.5">
+          {notesData && notesData.map((note, index) => (
+            <div key={index} className="flex items-start gap-2.5">
+              <img className="w-8 h-8 rounded-full" src="/pexels-mikhail-nilov-7681566.png" alt="User image"/>
+              <div className="flex flex-col gap-1 w-full max-w-[320px]">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
+                  <span className="text-sm font-normal text-gray-500 dark:text-gray-400">11:46</span>
+                </div>
+                <div className="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                  <p className="text-sm font-normal text-gray-900 dark:text-white">{note.note}</p>
+                </div>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+              </div>
+            </div>
+          ))}
+          {/* {notesData.map((note, index) => (
+            <div key={index} className="flex items-start gap-2.5">
+              <img className="w-8 h-8 rounded-full" src={note.imageUrl} alt="User image"/>
+              <div className="flex flex-col gap-1 w-full max-w-[320px]">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{note.author}</span>
+                  <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{note.time}</span>
+                </div>
+                <div className="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                  <p className="text-sm font-normal text-gray-900 dark:text-white">{note.content}</p>
+                </div>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{note.status}</span>
+              </div>
+            </div>
+          ))} */}
+          {/* <div class="flex items-start gap-2.5">
             <img class="w-8 h-8 rounded-full" src="/pexels-mikhail-nilov-7681566.png" alt="Jese image"/>
             <div class="flex flex-col gap-1 w-full max-w-[320px]">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
                   <span class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
                   <span class="text-sm font-normal text-gray-500 dark:text-gray-400">11:46</span>
                 </div>
+                
                 <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                   <p class="text-sm font-normal text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
                 </div>
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
             </div>
-          </div>
+          </div> */}
 
       </div>
     </div>
