@@ -39,7 +39,7 @@ export default function Home() {
     
     // Serialize the data
     const serializedData = serialize.serialize({ username, password });
-    console.log(serializedData)
+    console.log('the serialized data is ', serialize.serialize({ username, password }))
    
     try {
       // Send serialized data to the server

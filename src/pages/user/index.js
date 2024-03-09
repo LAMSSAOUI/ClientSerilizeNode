@@ -113,13 +113,9 @@ const index = () => {
           
           <div className='flex flex-col items-center gap-4'>
               <div className='flex justify-center flex-col'>
-                  {/* <div className='w-96 h-40 '> */}
-                    
-                  <img className="h-auto max-w-sm rounded-lg " src={imageUrl} alt="image description"/>
-                  {/* <div className='text-center p-4 border-2 rounded-lg border-t-0'>Confirmed by the Admin for your notes</div> */}
-
-                  {/* {imageUrl && <img src={imageUrl} alt="Fetched Image"  className='rounded'/>} */}
-                  {/* </div> */}
+                 
+                  <img className="h-40 w-auto rounded-lg " src={imageUrl} alt="image description"/>
+                  
               </div>
               {/* <div className='flex flex-col justify-start w-full'> */}
               <div className='w-full'>
@@ -238,7 +234,7 @@ const index = () => {
 
 {/* ####################     the second card   ##########################  */}
 
-      <div className='bg-[#ADCEFF] flex flex-col gap-10 w-fit rounded p-9 max-h-[680px]'>
+      <div className='bg-[#ADCEFF] flex flex-col gap-10 w-fit rounded p-9 overflow-auto h-[618px]'>
           {notesData && notesData.map((note, index) => (
             <div key={index} className="flex items-start gap-2.5">
               <img className="w-8 h-8 rounded-full" src="/pexels-mikhail-nilov-7681566.png" alt="User image"/>
@@ -254,35 +250,6 @@ const index = () => {
               </div>
             </div>
           ))}
-          {/* {notesData.map((note, index) => (
-            <div key={index} className="flex items-start gap-2.5">
-              <img className="w-8 h-8 rounded-full" src={note.imageUrl} alt="User image"/>
-              <div className="flex flex-col gap-1 w-full max-w-[320px]">
-                <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{note.author}</span>
-                  <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{note.time}</span>
-                </div>
-                <div className="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                  <p className="text-sm font-normal text-gray-900 dark:text-white">{note.content}</p>
-                </div>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{note.status}</span>
-              </div>
-            </div>
-          ))} */}
-          {/* <div class="flex items-start gap-2.5">
-            <img class="w-8 h-8 rounded-full" src="/pexels-mikhail-nilov-7681566.png" alt="Jese image"/>
-            <div class="flex flex-col gap-1 w-full max-w-[320px]">
-                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                  <span class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
-                  <span class="text-sm font-normal text-gray-500 dark:text-gray-400">11:46</span>
-                </div>
-                
-                <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                  <p class="text-sm font-normal text-gray-900 dark:text-white"> That's awesome. I think our users will really appreciate the improvements.</p>
-                </div>
-                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
-            </div>
-          </div> */}
 
       </div>
     </div>
